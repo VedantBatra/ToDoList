@@ -10,20 +10,19 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.get("/", function(req, res) {
 
-  var d = new Date();
-  var day = d.getDay();
+  var today = new Date();
 
-  var resDay = "";
+  var options = {
+    weekday : "long",
+    day : "numeric",
+    month : "long"
+  };
 
-  if(d == 6 || d == 0) {
-    resDay = "Weekend";
-  }
-  else {
-    resDay = "Weekday";
-  }
+  var day = today.toLocaleString("en-US", options);
+
 
   res.render('list', {
-    kindOfDay : resDay
+    kindOfDay : day
   });
 
 })
