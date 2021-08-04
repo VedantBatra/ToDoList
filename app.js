@@ -4,10 +4,28 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.urlencoded({extended : true}));
 
 app.get("/", function(req, res) {
-  res.send("Hello World");
+
+  var d = new Date();
+  var day = d.getDay();
+
+  var resDay = "";
+
+  if(d == 6 || d == 0) {
+    resDay = "Weekend";
+  }
+  else {
+    resDay = "Weekday";
+  }
+
+  res.render('list', {
+    kindOfDay : resDay
+  });
+
 })
 
 app.listen(3000, function() {
